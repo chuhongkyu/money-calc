@@ -1,0 +1,546 @@
+{
+  "generatedAt": "2026-09-22",
+  "count": 90,
+  "packages": [
+    {
+      "name": "@babel/runtime",
+      "version": "7.29.7",
+      "license": "MIT",
+      "repository": "https://github.com/babel/babel"
+    },
+    {
+      "name": "@capacitor/core",
+      "version": "8.5.2",
+      "license": "MIT",
+      "repository": "https://github.com/ionic-team/capacitor"
+    },
+    {
+      "name": "@capacitor/preferences",
+      "version": "8.0.1",
+      "license": "MIT",
+      "repository": "https://github.com/ionic-team/capacitor-plugins"
+    },
+    {
+      "name": "@floating-ui/core",
+      "version": "1.8.0",
+      "license": "MIT",
+      "repository": "https://github.com/floating-ui/floating-ui"
+    },
+    {
+      "name": "@floating-ui/dom",
+      "version": "1.8.0",
+      "license": "MIT",
+      "repository": "https://github.com/floating-ui/floating-ui"
+    },
+    {
+      "name": "@floating-ui/react",
+      "version": "0.27.20",
+      "license": "MIT",
+      "repository": "https://github.com/floating-ui/floating-ui"
+    },
+    {
+      "name": "@floating-ui/react-dom",
+      "version": "2.1.9",
+      "license": "MIT",
+      "repository": "https://github.com/floating-ui/floating-ui"
+    },
+    {
+      "name": "@floating-ui/utils",
+      "version": "0.2.12",
+      "license": "MIT",
+      "repository": "https://github.com/floating-ui/floating-ui"
+    },
+    {
+      "name": "@internationalized/date",
+      "version": "3.12.4",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/adobe/react-spectrum/tree/main/packages/@internationalized/date"
+    },
+    {
+      "name": "@karrotmarket/react-monochrome-icon",
+      "version": "1.27.0",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-icon-v3"
+    },
+    {
+      "name": "@radix-ui/react-compose-refs",
+      "version": "1.1.5",
+      "license": "MIT",
+      "repository": "https://github.com/radix-ui/primitives"
+    },
+    {
+      "name": "@radix-ui/react-focus-scope",
+      "version": "1.1.16",
+      "license": "MIT",
+      "repository": "https://github.com/radix-ui/primitives"
+    },
+    {
+      "name": "@radix-ui/react-primitive",
+      "version": "2.1.10",
+      "license": "MIT",
+      "repository": "https://github.com/radix-ui/primitives"
+    },
+    {
+      "name": "@radix-ui/react-slot",
+      "version": "1.3.3",
+      "license": "MIT",
+      "repository": "https://github.com/radix-ui/primitives"
+    },
+    {
+      "name": "@radix-ui/react-use-callback-ref",
+      "version": "1.1.4",
+      "license": "MIT",
+      "repository": "https://github.com/radix-ui/primitives"
+    },
+    {
+      "name": "@radix-ui/react-use-controllable-state",
+      "version": "1.2.2",
+      "license": "MIT",
+      "repository": "https://github.com/radix-ui/primitives"
+    },
+    {
+      "name": "@radix-ui/react-use-effect-event",
+      "version": "0.0.2",
+      "license": "MIT",
+      "repository": "https://github.com/radix-ui/primitives"
+    },
+    {
+      "name": "@radix-ui/react-use-layout-effect",
+      "version": "1.1.4",
+      "license": "MIT",
+      "repository": "https://github.com/radix-ui/primitives"
+    },
+    {
+      "name": "@radix-ui/react-use-size",
+      "version": "1.1.4",
+      "license": "MIT",
+      "repository": "https://github.com/radix-ui/primitives"
+    },
+    {
+      "name": "@seed-design/css",
+      "version": "2.8.3",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/dom-utils",
+      "version": "2.1.0",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react",
+      "version": "2.5.0",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-accordion",
+      "version": "1.0.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-attachment-display",
+      "version": "1.0.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-avatar",
+      "version": "2.0.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-checkbox",
+      "version": "2.0.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-collapsible",
+      "version": "1.0.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-date-picker",
+      "version": "1.2.0",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-dialog",
+      "version": "2.0.3",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-dismissible-layer",
+      "version": "1.0.2",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-drawer",
+      "version": "2.0.6",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-field",
+      "version": "2.0.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-field-button",
+      "version": "2.0.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-fieldset",
+      "version": "1.0.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-file-upload",
+      "version": "1.0.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-floating",
+      "version": "1.0.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-image",
+      "version": "1.1.0",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-menu",
+      "version": "2.0.2",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-middle-truncate",
+      "version": "1.0.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-navigation-menu",
+      "version": "2.0.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-popover",
+      "version": "2.0.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-portal",
+      "version": "2.0.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-presence",
+      "version": "1.0.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-prevent-scroll",
+      "version": "1.0.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-primitive",
+      "version": "2.0.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-progress",
+      "version": "2.0.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-pull-to-refresh",
+      "version": "2.1.0",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-quantity-picker",
+      "version": "1.0.0",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-radio-group",
+      "version": "2.0.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-scale-feedback",
+      "version": "1.0.0",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-segmented-control",
+      "version": "2.0.2",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-select",
+      "version": "1.0.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-side-navigation",
+      "version": "1.0.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-slider",
+      "version": "2.0.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-snackbar",
+      "version": "2.0.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-supports",
+      "version": "1.0.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-switch",
+      "version": "2.0.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-tabs",
+      "version": "2.0.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-text-field",
+      "version": "2.0.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-time-picker",
+      "version": "1.0.0",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-toggle",
+      "version": "2.0.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-tooltip",
+      "version": "1.0.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-use-controllable-state",
+      "version": "2.0.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/react-wheel-picker",
+      "version": "1.1.1",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@seed-design/stackflow",
+      "version": "2.0.4",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/daangn/seed-design"
+    },
+    {
+      "name": "@stackflow/config",
+      "version": "2.0.0",
+      "license": "MIT",
+      "repository": "https://github.com/daangn/stackflow"
+    },
+    {
+      "name": "@stackflow/core",
+      "version": "3.1.0",
+      "license": "MIT",
+      "repository": "https://github.com/daangn/stackflow"
+    },
+    {
+      "name": "@stackflow/plugin-history-sync",
+      "version": "2.1.0",
+      "license": "MIT",
+      "repository": "https://github.com/daangn/stackflow"
+    },
+    {
+      "name": "@stackflow/plugin-renderer-basic",
+      "version": "1.1.16",
+      "license": "MIT",
+      "repository": "https://github.com/daangn/stackflow"
+    },
+    {
+      "name": "@stackflow/react",
+      "version": "2.1.4",
+      "license": "MIT",
+      "repository": "https://github.com/daangn/stackflow"
+    },
+    {
+      "name": "@stackflow/react-ui-core",
+      "version": "1.3.7",
+      "license": "MIT",
+      "repository": "https://github.com/daangn/stackflow"
+    },
+    {
+      "name": "@swc/helpers",
+      "version": "0.5.23",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/swc-project/swc"
+    },
+    {
+      "name": "aria-hidden",
+      "version": "1.2.6",
+      "license": "MIT",
+      "repository": "https://github.com/theKashey/aria-hidden"
+    },
+    {
+      "name": "clsx",
+      "version": "2.1.1",
+      "license": "MIT",
+      "repository": "lukeed/clsx"
+    },
+    {
+      "name": "embla-carousel",
+      "version": "8.6.0",
+      "license": "MIT",
+      "repository": "https://github.com/davidjerleke/embla-carousel"
+    },
+    {
+      "name": "embla-carousel-auto-height",
+      "version": "8.6.0",
+      "license": "MIT",
+      "repository": "https://github.com/davidjerleke/embla-carousel"
+    },
+    {
+      "name": "embla-carousel-react",
+      "version": "8.6.0",
+      "license": "MIT",
+      "repository": "https://github.com/davidjerleke/embla-carousel"
+    },
+    {
+      "name": "embla-carousel-reactive-utils",
+      "version": "8.6.0",
+      "license": "MIT",
+      "repository": "https://github.com/davidjerleke/embla-carousel"
+    },
+    {
+      "name": "flatted",
+      "version": "3.4.4",
+      "license": "ISC",
+      "repository": "https://github.com/WebReflection/flatted"
+    },
+    {
+      "name": "history",
+      "version": "5.3.0",
+      "license": "MIT",
+      "repository": "remix-run/history"
+    },
+    {
+      "name": "react",
+      "version": "19.3.0",
+      "license": "MIT",
+      "repository": "https://github.com/react/react"
+    },
+    {
+      "name": "react-dom",
+      "version": "19.3.0",
+      "license": "MIT",
+      "repository": "https://github.com/react/react"
+    },
+    {
+      "name": "react-fast-compare",
+      "version": "3.2.2",
+      "license": "MIT",
+      "repository": "https://github.com/FormidableLabs/react-fast-compare"
+    },
+    {
+      "name": "react18-use",
+      "version": "0.4.1",
+      "license": "MIT",
+      "repository": "https://github.com/dai-shi/react18-use"
+    },
+    {
+      "name": "scheduler",
+      "version": "0.28.0",
+      "license": "MIT",
+      "repository": "https://github.com/react/react"
+    },
+    {
+      "name": "tabbable",
+      "version": "6.5.0",
+      "license": "MIT",
+      "repository": "https://github.com/focus-trap/tabbable"
+    },
+    {
+      "name": "tslib",
+      "version": "2.8.1",
+      "license": "0BSD",
+      "repository": "https://github.com/Microsoft/tslib"
+    },
+    {
+      "name": "unicode-segmenter",
+      "version": "0.17.3",
+      "license": "MIT",
+      "repository": "https://github.com/cometkim/unicode-segmenter"
+    },
+    {
+      "name": "url-pattern",
+      "version": "1.0.3",
+      "license": "MIT",
+      "repository": "https://github.com/snd/url-pattern"
+    },
+    {
+      "name": "zustand",
+      "version": "5.0.15",
+      "license": "MIT",
+      "repository": "https://github.com/pmndrs/zustand"
+    }
+  ]
+}

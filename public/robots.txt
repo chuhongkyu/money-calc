@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /result
+Disallow: /detail
+Disallow: /deduction/
+Sitemap: https://salary-calc.example.com/sitemap.xml
