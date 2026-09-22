@@ -1,6 +1,5 @@
 /**
  * 서비스·운영자 정보. 법적 페이지와 SEO 메타에서 함께 쓴다.
- * TODO(user): 연락처를 실제 값으로 바꾼다.
  */
 export const site = {
   name: "연봉 실수령액 계산기",
@@ -10,7 +9,7 @@ export const site = {
   /** 배포 도메인. sitemap·canonical·OG url 에 쓴다 */
   url: "https://money-calc-chi.vercel.app",
   operator: "mr.chu",
-  contactEmail: "contact@example.com", // TODO(user)
+  contactEmail: "mrbizinisu@gmail.com",
   /** 개인정보처리방침·이용약관 시행일 */
   legalEffectiveDate: "2026-09-22",
   version: "0.1.0",
