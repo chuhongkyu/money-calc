@@ -10,6 +10,7 @@ import { Switch } from "seed-design/ui/switch";
 import { useInterstitialBeforeResult } from "@/ads/react/useAds";
 import { useCalculatorStore } from "@/app/store";
 import { useSalaryPreview } from "@/app/useSalaryPreview";
+import { HeaderContainer, ScreenContainer } from "@/components/common/ScreenContainer";
 import { MoneyInput } from "@/components/inputs/MoneyInput";
 import { StepperInput } from "@/components/inputs/StepperInput";
 import { SALARY_LIMITS, type WithholdingRate } from "@/domain/salary";
@@ -40,129 +41,140 @@ export const DetailActivity: ActivityComponentType<"DetailActivity"> = () => {
   return (
     <AppScreen>
       <AppBar>
-        <AppBarLeft>
-          <AppBarBackButton />
-        </AppBarLeft>
-        <AppBarMain title="더 정확하게 알아보기" />
+        <HeaderContainer>
+          <AppBarLeft>
+            <AppBarBackButton />
+          </AppBarLeft>
+          <AppBarMain title="더 정확하게 알아보기" />
+        </HeaderContainer>
       </AppBar>
       <AppScreenContent>
-        <VStack gap="x6" px="spacingX.globalGutter" py="x4" style={{ paddingBottom: 140 }}>
-          <Callout
-            tone="informative"
-            description="회사 급여명세서와 같은 조건을 넣을수록 실수령액이 정확해져요. 입력값은 이 기기에만 저장돼요."
-          />
+        <ScreenContainer>
+          <VStack gap="x6" px="spacingX.globalGutter" py="x4" style={{ paddingBottom: 140 }}>
+            <Callout
+              tone="informative"
+              description="회사 급여명세서와 같은 조건을 넣을수록 실수령액이 정확해져요. 입력값은 이 기기에만 저장돼요."
+            />
 
-          <VStack gap="x4">
-            <SegmentedControl
-              aria-label="입력 단위"
-              value={store.amountType}
-              onValueChange={(v) => store.setAmountType(v === "monthly" ? "monthly" : "annual")}
-            >
-              <SegmentedControlItem value="annual">연봉</SegmentedControlItem>
-              <SegmentedControlItem value="monthly">월급</SegmentedControlItem>
-            </SegmentedControl>
+            <VStack gap="x4">
+              <SegmentedControl
+                aria-label="입력 단위"
+                value={store.amountType}
+                onValueChange={(v) => store.setAmountType(v === "monthly" ? "monthly" : "annual")}
+              >
+                <SegmentedControlItem value="annual">연봉</SegmentedControlItem>
+                <SegmentedControlItem value="monthly">월급</SegmentedControlItem>
+              </SegmentedControl>
+              <MoneyInput
+                label={amountLabel}
+                name="amount"
+                value={store.amount}
+                onChange={store.setAmount}
+                max={amountMax}
+                size="medium"
+              />
+            </VStack>
+
+            {store.amountType === "annual" && (
+              <Switch
+                label="퇴직금 포함 (연봉 ÷ 13)"
+                checked={store.severanceIncluded}
+                onCheckedChange={store.setSeveranceIncluded}
+              />
+            )}
+
             <MoneyInput
-              label={amountLabel}
-              name="amount"
-              value={store.amount}
-              onChange={store.setAmount}
-              max={amountMax}
+              label="비과세액 (월)"
+              name="nonTaxable"
               size="medium"
+              value={store.nonTaxableMonthly}
+              onChange={store.setNonTaxableMonthly}
+              max={SALARY_LIMITS.maxMonthly}
+              description="식대 등 비과세 항목. 식대 비과세 한도 200,000원"
+              errorMessage={taxableIssue?.message}
+              showKorean={false}
             />
-          </VStack>
 
-          {store.amountType === "annual" && (
-            <Switch
-              label="퇴직금 포함 (연봉 ÷ 13)"
-              checked={store.severanceIncluded}
-              onCheckedChange={store.setSeveranceIncluded}
-            />
-          )}
+            <VStack gap="x4">
+              <StepperInput
+                label="부양가족 수"
+                description="본인 포함"
+                value={store.dependents}
+                min={SALARY_LIMITS.minDependents}
+                max={SALARY_LIMITS.maxDependents}
+                onChange={store.setDependents}
+              />
+              <StepperInput
+                label="8세~20세 자녀 수"
+                value={store.children}
+                min={0}
+                max={Math.max(0, store.dependents - 1)}
+                onChange={store.setChildren}
+              />
+            </VStack>
 
-          <MoneyInput
-            label="비과세액 (월)"
-            name="nonTaxable"
-            size="medium"
-            value={store.nonTaxableMonthly}
-            onChange={store.setNonTaxableMonthly}
-            max={SALARY_LIMITS.maxMonthly}
-            description="식대 등 비과세 항목. 식대 비과세 한도 200,000원"
-            errorMessage={taxableIssue?.message}
-            showKorean={false}
-          />
+            <VStack gap="x2">
+              <Text textStyle="t5Medium">원천징수 비율</Text>
+              <Text textStyle="t3Regular" color="fg.neutralMuted">
+                회사에 신고한 비율. 모르면 100%
+              </Text>
+              <RadioChipRoot
+                aria-label="원천징수 비율"
+                value={String(store.withholdingRate)}
+                onValueChange={(v) => store.setWithholdingRate(Number(v) as WithholdingRate)}
+              >
+                <HStack gap="x2">
+                  {WITHHOLDING_OPTIONS.map((r) => (
+                    <RadioChipItem key={r} value={String(r)} size="small">
+                      <ChipLabel>{r * 100}%</ChipLabel>
+                    </RadioChipItem>
+                  ))}
+                </HStack>
+              </RadioChipRoot>
+            </VStack>
 
-          <VStack gap="x4">
-            <StepperInput
-              label="부양가족 수"
-              description="본인 포함"
-              value={store.dependents}
-              min={SALARY_LIMITS.minDependents}
-              max={SALARY_LIMITS.maxDependents}
-              onChange={store.setDependents}
-            />
-            <StepperInput
-              label="8세~20세 자녀 수"
-              value={store.children}
-              min={0}
-              max={Math.max(0, store.dependents - 1)}
-              onChange={store.setChildren}
-            />
-          </VStack>
+            {result?.warnings
+              .filter((w) => w !== "RULES_UNVERIFIED")
+              .map((w) => (
+                <Callout key={w} tone="warning" description={WARNING_MESSAGES[w]} />
+              ))}
 
-          <VStack gap="x2">
-            <Text textStyle="t5Medium">원천징수 비율</Text>
-            <Text textStyle="t3Regular" color="fg.neutralMuted">
-              회사에 신고한 비율. 모르면 100%
-            </Text>
-            <RadioChipRoot
-              aria-label="원천징수 비율"
-              value={String(store.withholdingRate)}
-              onValueChange={(v) => store.setWithholdingRate(Number(v) as WithholdingRate)}
+            <Box
+              position="fixed"
+              left={0}
+              right={0}
+              px="spacingX.globalGutter"
+              py="x3"
+              bg="bg.layerDefault"
+              style={{
+                bottom: keyboardInset,
+                paddingBottom: `calc(var(--seed-dimension-x3) + env(safe-area-inset-bottom))`,
+                boxShadow: "0 -1px 0 var(--seed-color-stroke-neutral-muted)",
+              }}
             >
-              <HStack gap="x2">
-                {WITHHOLDING_OPTIONS.map((r) => (
-                  <RadioChipItem key={r} value={String(r)} size="small">
-                    <ChipLabel>{r * 100}%</ChipLabel>
-                  </RadioChipItem>
-                ))}
-              </HStack>
-            </RadioChipRoot>
+              <ScreenContainer>
+                <HStack justify="space-between" align="center" gap="x4">
+                  <VStack gap="x0">
+                    <Text textStyle="t3Regular" color="fg.neutralMuted">
+                      월 실수령액
+                    </Text>
+                    <Text textStyle="t7Bold" className="tabular" aria-live="polite">
+                      {result ? formatWon(result.monthlyNet) : "—"}
+                    </Text>
+                  </VStack>
+                  <ActionButton
+                    variant="brandSolid"
+                    size="large"
+                    disabled={!result}
+                    onClick={goResult}
+                  >
+                    결과 보기
+                  </ActionButton>
+                </HStack>
+              </ScreenContainer>
+            </Box>
           </VStack>
-
-          {result?.warnings
-            .filter((w) => w !== "RULES_UNVERIFIED")
-            .map((w) => (
-              <Callout key={w} tone="warning" description={WARNING_MESSAGES[w]} />
-            ))}
-
-          <Box
-            position="fixed"
-            left={0}
-            right={0}
-            px="spacingX.globalGutter"
-            py="x3"
-            bg="layerDefault"
-            style={{
-              bottom: keyboardInset,
-              paddingBottom: `calc(var(--seed-dimension-x3) + env(safe-area-inset-bottom))`,
-              boxShadow: "0 -1px 0 var(--seed-color-stroke-neutral-muted)",
-            }}
-          >
-            <HStack justify="space-between" align="center" gap="x4">
-              <VStack gap="x0">
-                <Text textStyle="t3Regular" color="fg.neutralMuted">
-                  월 실수령액
-                </Text>
-                <Text textStyle="t7Bold" className="tabular" aria-live="polite">
-                  {result ? formatWon(result.monthlyNet) : "—"}
-                </Text>
-              </VStack>
-              <ActionButton variant="brandSolid" size="large" disabled={!result} onClick={goResult}>
-                결과 보기
-              </ActionButton>
-            </HStack>
-          </Box>
-        </VStack>
+        </ScreenContainer>
       </AppScreenContent>
     </AppScreen>
   );

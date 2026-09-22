@@ -11,6 +11,8 @@ import { useCalculatorStore } from "@/app/store";
 import { useSalaryPreview } from "@/app/useSalaryPreview";
 import { LegalFooter } from "@/components/common/LegalFooter";
 import { RuleBadge } from "@/components/common/RuleBadge";
+import { HeroBanner } from "@/components/common/HeroBanner";
+import { HeaderContainer, ScreenContainer } from "@/components/common/ScreenContainer";
 import { DEFAULT_QUICK_AMOUNTS, MoneyInput } from "@/components/inputs/MoneyInput";
 import { SALARY_LIMITS } from "@/domain/salary";
 import { WARNING_MESSAGES } from "@/domain/salary/labels";
@@ -40,96 +42,102 @@ export const HomeActivity: ActivityComponentType<"HomeActivity"> = () => {
   return (
     <AppScreen>
       <AppBar>
-        <AppBarMain title="연봉 실수령액 계산기" />
-        <AppBarRight>
-          <AppBarIconButton aria-label="설정" onClick={() => push("SettingsActivity", {})}>
-            <IconGearLine />
-          </AppBarIconButton>
-        </AppBarRight>
+        <HeaderContainer>
+          <AppBarMain title="연봉 실수령액 계산기" />
+          <AppBarRight>
+            <AppBarIconButton aria-label="설정" onClick={() => push("SettingsActivity", {})}>
+              <IconGearLine />
+            </AppBarIconButton>
+          </AppBarRight>
+        </HeaderContainer>
       </AppBar>
       <AppScreenContent>
-        <VStack gap="x6" px="spacingX.globalGutter" py="x4" pb="x10">
-          <VStack gap="x4">
-            <SegmentedControl
-              aria-label="입력 단위"
-              value={store.amountType}
-              onValueChange={(v) => store.setAmountType(v === "monthly" ? "monthly" : "annual")}
-            >
-              <SegmentedControlItem value="annual">연봉</SegmentedControlItem>
-              <SegmentedControlItem value="monthly">월급</SegmentedControlItem>
-            </SegmentedControl>
+        <ScreenContainer>
+          <VStack gap="x6" px="spacingX.globalGutter" pt="0" pb="x10">
+            <HeroBanner />
 
-            <MoneyInput
-              label={amountLabel}
-              name="amount"
-              value={store.amount}
-              onChange={store.setAmount}
-              max={amountMax}
-              placeholder={store.amountType === "annual" ? "45,000,000" : "3,750,000"}
-              quickAmounts={DEFAULT_QUICK_AMOUNTS}
-              autoFocus
-            />
-          </VStack>
-
-          {result ? (
             <VStack gap="x4">
-              <Box bg="layerFloating" borderRadius="r4" px="x5" py="x5">
-                <VStack gap="x1" align="center">
-                  <Text textStyle="t4Regular" color="fg.neutralMuted">
-                    한 달에 실제로 받는 돈
-                  </Text>
-                  <Text as="h2" textStyle="t12Bold" className="tabular" aria-live="polite">
-                    {formatWon(result.monthlyNet)}
-                  </Text>
-                  <Text textStyle="t4Regular" color="fg.neutralMuted" className="tabular">
-                    세전 월급 {formatWon(result.monthlySalary)} · 공제{" "}
-                    {formatWon(result.totalDeductions)}
-                  </Text>
-                  <Text textStyle="t3Regular" color="fg.neutralSubtle" align="center">
-                    부양가족 {store.dependents}명 · 비과세{" "}
-                    {formatKoreanMoney(store.nonTaxableMonthly)} ·{" "}
-                    {store.severanceIncluded ? "퇴직금 포함" : "퇴직금 별도"} 기준
-                  </Text>
-                  <Box pt="x2">
-                    <RuleBadge
-                      ruleSet={ruleSet}
-                      onClick={() =>
-                        push("RulesInfoActivity", { year: String(ruleSet.rules.year) })
-                      }
-                    />
-                  </Box>
-                </VStack>
-              </Box>
+              <SegmentedControl
+                aria-label="입력 단위"
+                value={store.amountType}
+                onValueChange={(v) => store.setAmountType(v === "monthly" ? "monthly" : "annual")}
+              >
+                <SegmentedControlItem value="annual">연봉</SegmentedControlItem>
+                <SegmentedControlItem value="monthly">월급</SegmentedControlItem>
+              </SegmentedControl>
 
-              <VStack gap="x2">
-                <ActionButton variant="brandSolid" size="large" onClick={goResult}>
-                  공제 내역 보기
-                </ActionButton>
-                <ActionButton
-                  variant="neutralWeak"
-                  size="large"
-                  onClick={() => push("DetailActivity", {})}
-                >
-                  실수령액이 다른가요? 더 정확하게 알아보기
-                </ActionButton>
-              </VStack>
-
-              {result.warnings
-                .filter((w) => w !== "RULES_UNVERIFIED")
-                .map((w) => (
-                  <Callout key={w} tone="warning" description={WARNING_MESSAGES[w]} />
-                ))}
+              <MoneyInput
+                label={amountLabel}
+                name="amount"
+                value={store.amount}
+                onChange={store.setAmount}
+                max={amountMax}
+                placeholder={store.amountType === "annual" ? "45,000,000" : "3,750,000"}
+                quickAmounts={DEFAULT_QUICK_AMOUNTS}
+                autoFocus
+              />
             </VStack>
-          ) : (
-            <HStack justify="center" py="x6">
-              <Text textStyle="t4Regular" color="fg.neutralSubtle" align="center">
-                {amountLabel}을 입력하면 월 실수령액이 바로 나와요.
-              </Text>
-            </HStack>
-          )}
 
-          <LegalFooter />
-        </VStack>
+            {result ? (
+              <VStack gap="x4">
+                <Box bg="bg.layerFloating" borderRadius="r4" px="x5" py="x5">
+                  <VStack gap="x1" align="center">
+                    <Text textStyle="t4Regular" color="fg.neutralMuted">
+                      한 달에 실제로 받는 돈
+                    </Text>
+                    <Text as="h2" textStyle="t12Bold" className="tabular" aria-live="polite">
+                      {formatWon(result.monthlyNet)}
+                    </Text>
+                    <Text textStyle="t4Regular" color="fg.neutralMuted" className="tabular">
+                      세전 월급 {formatWon(result.monthlySalary)} · 공제{" "}
+                      {formatWon(result.totalDeductions)}
+                    </Text>
+                    <Text textStyle="t3Regular" color="fg.neutralSubtle" align="center">
+                      부양가족 {store.dependents}명 · 비과세{" "}
+                      {formatKoreanMoney(store.nonTaxableMonthly)} ·{" "}
+                      {store.severanceIncluded ? "퇴직금 포함" : "퇴직금 별도"} 기준
+                    </Text>
+                    <Box pt="x2">
+                      <RuleBadge
+                        ruleSet={ruleSet}
+                        onClick={() =>
+                          push("RulesInfoActivity", { year: String(ruleSet.rules.year) })
+                        }
+                      />
+                    </Box>
+                  </VStack>
+                </Box>
+
+                <VStack gap="x2">
+                  <ActionButton variant="brandSolid" size="large" onClick={goResult}>
+                    공제 내역 보기
+                  </ActionButton>
+                  <ActionButton
+                    variant="neutralWeak"
+                    size="large"
+                    onClick={() => push("DetailActivity", {})}
+                  >
+                    실수령액이 다른가요? 더 정확하게 알아보기
+                  </ActionButton>
+                </VStack>
+
+                {result.warnings
+                  .filter((w) => w !== "RULES_UNVERIFIED")
+                  .map((w) => (
+                    <Callout key={w} tone="warning" description={WARNING_MESSAGES[w]} />
+                  ))}
+              </VStack>
+            ) : (
+              <HStack justify="center" py="x6">
+                <Text textStyle="t4Regular" color="fg.neutralSubtle" align="center">
+                  {amountLabel}을 입력하면 월 실수령액이 바로 나와요.
+                </Text>
+              </HStack>
+            )}
+
+            <LegalFooter />
+          </VStack>
+        </ScreenContainer>
       </AppScreenContent>
     </AppScreen>
   );
