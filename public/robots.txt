@@ -3,4 +3,4 @@ Allow: /
 Disallow: /result
 Disallow: /detail
 Disallow: /deduction/
-Sitemap: https://salary-calc.example.com/sitemap.xml
+Sitemap: https://money-calc-chi.vercel.app/sitemap.xml

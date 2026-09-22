@@ -10,13 +10,21 @@
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#111111" media="(prefers-color-scheme: dark)" />
 
-    <!-- SEO. 도메인은 TODO(user): src/legal/site.ts 의 url 과 함께 실제 값으로 바꾼다 -->
+    <!--
+      Google Search Console 소유 확인.
+      money-calc-chi.vercel.app 은 vercel.app 존을 Vercel 이 소유하므로 DNS TXT 레코드를 추가할 수 없다.
+      따라서 도메인 속성이 아니라 URL 접두어 속성(https://money-calc-chi.vercel.app/) + "HTML 태그" 방식을 쓴다.
+      아래 값은 사용자가 준 DNS TXT 토큰이다. Search Console 의 "HTML 태그" 화면에 다른 값이 보이면 그 값으로 교체할 것.
+    -->
+    <meta name="google-site-verification" content="8jS-c7VJqL-3HWMnERXzOuksgC0DMq62j5KsO3GH-JY" />
+
+    <!-- SEO. 도메인은 src/legal/site.ts 의 url 과 항상 같은 값이어야 한다 -->
     <title>연봉 실수령액 계산기 · 2026년 월 실수령액 바로 계산</title>
     <meta
       name="description"
       content="연봉을 입력하면 2026년 기준 월 실수령액과 4대보험·소득세 공제 내역을 바로 계산합니다. 로그인 없음, 입력값은 내 기기에만 저장."
     />
-    <link rel="canonical" href="https://salary-calc.example.com/" />
+    <link rel="canonical" href="https://money-calc-chi.vercel.app/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="연봉 실수령액 계산기" />
     <meta property="og:title" content="연봉 넣으면 바로 나오는 월 실수령액" />
@@ -24,15 +32,15 @@
       property="og:description"
       content="2026년 기준 4대보험·소득세 공제 내역까지 한 번에. 로그인 없음."
     />
-    <meta property="og:url" content="https://salary-calc.example.com/" />
-    <meta property="og:image" content="https://salary-calc.example.com/og.png" />
+    <meta property="og:url" content="https://money-calc-chi.vercel.app/" />
+    <meta property="og:image" content="https://money-calc-chi.vercel.app/og.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ko_KR" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="연봉 넣으면 바로 나오는 월 실수령액" />
     <meta name="twitter:description" content="2026년 기준 4대보험·소득세 공제 내역까지 한 번에." />
-    <meta name="twitter:image" content="https://salary-calc.example.com/og.png" />
+    <meta name="twitter:image" content="https://money-calc-chi.vercel.app/og.png" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="실수령액 계산기" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -52,7 +60,7 @@
             "name": "연봉 실수령액 계산기",
             "applicationCategory": "FinanceApplication",
             "operatingSystem": "Web, iOS, Android",
-            "url": "https://salary-calc.example.com/",
+            "url": "https://money-calc-chi.vercel.app/",
             "description": "연봉을 입력하면 2026년 기준 월 실수령액과 4대보험·소득세 공제 내역을 바로 계산합니다.",
             "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" },
             "inLanguage": "ko"

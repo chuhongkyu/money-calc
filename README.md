@@ -1,5 +1,7 @@
 # 연봉 실수령액 계산기 (가칭: `salary-calc`)
 
+**배포(웹): https://money-calc-chi.vercel.app/**
+
 > 이 문서는 **Claude(코딩 에이전트)가 이 프로젝트에서 작업할 때 따르는 기준 문서**입니다.
 > 작업 전 반드시 전체를 읽고, 여기서 정한 규칙과 우선순위를 지켜주세요.
 > 불확실한 세율이나 법령 값은 **추측하지 말고** `TODO(verify)` 표시와 함께 사람에게 확인을 요청하세요.
@@ -40,7 +42,7 @@
 | 인앱결제      | RevenueCat (`@revenuecat/purchases-capacitor`)                                            | 광고 제거 상품                                         |
 | 상태          | Zustand + 로컬 저장소 (Capacitor Preferences / localStorage 어댑터)                       |                                                        |
 | 테스트        | Vitest (계산 로직), Playwright (웹 E2E)                                                   |                                                        |
-| 웹 배포       | Vercel 또는 Cloudflare Pages                                                              |                                                        |
+| 웹 배포       | Vercel — https://money-calc-chi.vercel.app/                                               |                                                        |
 | 패키지 매니저 | pnpm                                                                                      |                                                        |
 
 ### SEED 및 Stackflow 설정 메모 (공식 문서 기준)
@@ -367,6 +369,7 @@ VITE_REVENUECAT_KEY_ANDROID=
 1. **작업 순서를 지킨다:** 도메인 계산(테스트 포함) → 입력 컴포넌트 → 화면 → 광고 → 네이티브 → SEO.
 2. **법령과 요율 값은 추측하지 않는다.** 모르는 값은 `TODO(verify)`와 출처 후보를 남기고 작업 요약에 목록으로 보고한다.
 3. SEED에 있는 컴포넌트와 토큰을 우선 사용한다. 색상, 간격, 폰트를 하드코딩하지 않는다.
+   - 브랜드 컬러는 **네이버 그린 `#03C75A`**. SEED 기본 팔레트(당근 주황) 대신 `src/app/global.css` 에서 brand 팔레트 토큰(`--seed-color-palette-carrot-*`)을 덮어쓴다. 컴포넌트마다 색을 지정하지 말고 이 한 곳만 고친다.
 4. 새 의존성을 추가할 때는 이유를 한 줄로 커밋 메시지에 적는다.
 5. 계산 로직을 바꾸면 골든 테스트를 함께 갱신하고, 모든 테스트가 통과해야 한다.
 6. 광고 관련 코드는 `ads/` 밖에서 SDK를 직접 호출하지 않는다.

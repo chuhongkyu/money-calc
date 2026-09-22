@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- TODO(user): 도메인을 실제 값으로. src/legal/site.ts 의 url 과 맞춘다 -->
+<!-- 도메인은 src/legal/site.ts 의 url 과 맞춘다 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://salary-calc.example.com/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://salary-calc.example.com/rules/2026</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://salary-calc.example.com/privacy</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
-  <url><loc>https://salary-calc.example.com/terms</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://money-calc-chi.vercel.app/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://money-calc-chi.vercel.app/rules/2026</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://money-calc-chi.vercel.app/privacy</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://money-calc-chi.vercel.app/terms</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
 </urlset>
