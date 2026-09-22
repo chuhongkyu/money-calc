@@ -17,6 +17,7 @@ import { AdBannerSlot } from "@/ads/react/AdBannerSlot";
 import { useCalculatorStore } from "@/app/store";
 import { useSalaryPreview } from "@/app/useSalaryPreview";
 import { RuleBadge } from "@/components/common/RuleBadge";
+import { HeaderContainer, ScreenContainer } from "@/components/common/ScreenContainer";
 import { DeductionList } from "@/components/result/DeductionList";
 import { NetSummary } from "@/components/result/NetSummary";
 import { WARNING_MESSAGES } from "@/domain/salary/labels";
@@ -44,79 +45,83 @@ export const ResultActivity: ActivityComponentType<"ResultActivity"> = () => {
   return (
     <AppScreen>
       <AppBar>
-        <AppBarLeft>
-          <AppBarBackButton />
-        </AppBarLeft>
-        <AppBarMain title="계산 결과" />
-        <AppBarRight>
-          <AppBarIconButton aria-label="공유" onClick={handleShare}>
-            <IconAndroidshareLine />
-          </AppBarIconButton>
-        </AppBarRight>
+        <HeaderContainer>
+          <AppBarLeft>
+            <AppBarBackButton />
+          </AppBarLeft>
+          <AppBarMain title="계산 결과" />
+          <AppBarRight>
+            <AppBarIconButton aria-label="공유" onClick={handleShare}>
+              <IconAndroidshareLine />
+            </AppBarIconButton>
+          </AppBarRight>
+        </HeaderContainer>
       </AppBar>
       <AppScreenContent>
-        {!result ? (
-          <VStack gap="x4" px="spacingX.globalGutter" py="x6">
-            <Callout
-              tone="warning"
-              description="입력값이 없거나 올바르지 않아요. 다시 입력해 주세요."
-            />
-            <ActionButton variant="neutralWeak" onClick={() => pop()}>
-              입력으로 돌아가기
-            </ActionButton>
-          </VStack>
-        ) : (
-          <VStack gap="x6" pb="x10">
-            <VStack gap="x3" px="spacingX.globalGutter" pt="x4" align="center">
-              <RuleBadge
-                ruleSet={ruleSet}
-                onClick={() => push("RulesInfoActivity", { year: String(ruleSet.rules.year) })}
+        <ScreenContainer>
+          {!result ? (
+            <VStack gap="x4" px="spacingX.globalGutter" py="x6">
+              <Callout
+                tone="warning"
+                description="입력값이 없거나 올바르지 않아요. 다시 입력해 주세요."
               />
-              <NetSummary result={result} />
-              {comparison && (
-                <Text textStyle="t4Regular" color="fg.neutralMuted" className="tabular">
-                  {comparison.otherLabel} 같은 시점 대비 월{" "}
-                  {formatSignedWon(comparison.monthlyNetDiff)}
-                </Text>
-              )}
+              <ActionButton variant="neutralWeak" onClick={() => pop()}>
+                입력으로 돌아가기
+              </ActionButton>
             </VStack>
-
-            <DeductionList
-              result={result}
-              onSelect={(key) => push("DeductionInfoActivity", { key })}
-            />
-
-            <VStack gap="x3" px="spacingX.globalGutter">
-              {result.warnings.map((w) => (
-                <Callout
-                  key={w}
-                  tone={w === "RULES_UNVERIFIED" ? "neutral" : "warning"}
-                  description={WARNING_MESSAGES[w]}
+          ) : (
+            <VStack gap="x6" pb="x10">
+              <VStack gap="x3" px="spacingX.globalGutter" pt="x4" align="center">
+                <RuleBadge
+                  ruleSet={ruleSet}
+                  onClick={() => push("RulesInfoActivity", { year: String(ruleSet.rules.year) })}
                 />
-              ))}
-              <Text textStyle="t3Regular" color="fg.neutralSubtle">
-                본 계산은 {result.tableTitle} 기준 추정치이며 실제 급여와 다를 수 있습니다.
-              </Text>
-            </VStack>
+                <NetSummary result={result} />
+                {comparison && (
+                  <Text textStyle="t4Regular" color="fg.neutralMuted" className="tabular">
+                    {comparison.otherLabel} 같은 시점 대비 월{" "}
+                    {formatSignedWon(comparison.monthlyNetDiff)}
+                  </Text>
+                )}
+              </VStack>
 
-            <VStack px="spacingX.globalGutter" gap="x2">
-              <ActionButton
-                variant="neutralWeak"
-                size="large"
-                onClick={() => push("DetailActivity", {})}
-              >
-                실수령액이 다른가요? 더 정확하게 알아보기
-              </ActionButton>
-              <ActionButton variant="brandSolid" size="large" onClick={handleShare}>
-                공유
-              </ActionButton>
-            </VStack>
+              <DeductionList
+                result={result}
+                onSelect={(key) => push("DeductionInfoActivity", { key })}
+              />
 
-            <Box px="spacingX.globalGutter">
-              <AdBannerSlot slot="result_bottom" />
-            </Box>
-          </VStack>
-        )}
+              <VStack gap="x3" px="spacingX.globalGutter">
+                {result.warnings.map((w) => (
+                  <Callout
+                    key={w}
+                    tone={w === "RULES_UNVERIFIED" ? "neutral" : "warning"}
+                    description={WARNING_MESSAGES[w]}
+                  />
+                ))}
+                <Text textStyle="t3Regular" color="fg.neutralSubtle">
+                  본 계산은 {result.tableTitle} 기준 추정치이며 실제 급여와 다를 수 있습니다.
+                </Text>
+              </VStack>
+
+              <VStack px="spacingX.globalGutter" gap="x2">
+                <ActionButton
+                  variant="neutralWeak"
+                  size="large"
+                  onClick={() => push("DetailActivity", {})}
+                >
+                  실수령액이 다른가요? 더 정확하게 알아보기
+                </ActionButton>
+                <ActionButton variant="brandSolid" size="large" onClick={handleShare}>
+                  공유
+                </ActionButton>
+              </VStack>
+
+              <Box px="spacingX.globalGutter">
+                <AdBannerSlot slot="result_bottom" />
+              </Box>
+            </VStack>
+          )}
+        </ScreenContainer>
       </AppScreenContent>
     </AppScreen>
   );

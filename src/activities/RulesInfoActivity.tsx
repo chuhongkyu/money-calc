@@ -8,6 +8,7 @@ import { ListHeader } from "seed-design/ui/list-header";
 import { SegmentedControl, SegmentedControlItem } from "seed-design/ui/segmented-control";
 import { useState } from "react";
 import { useCalculatorStore } from "@/app/store";
+import { HeaderContainer, ScreenContainer } from "@/components/common/ScreenContainer";
 import { formatRate, formatWon } from "@/lib/money";
 import { availableTables, availableYears, getRuleSet, getRules, hasRules } from "@/rules";
 
@@ -21,134 +22,142 @@ export const RulesInfoActivity: ActivityComponentType<"RulesInfoActivity"> = ({ 
   return (
     <AppScreen>
       <AppBar>
-        <AppBarLeft>
-          <AppBarBackButton />
-        </AppBarLeft>
-        <AppBarMain title="계산 기준 안내" />
+        <HeaderContainer>
+          <AppBarLeft>
+            <AppBarBackButton />
+          </AppBarLeft>
+          <AppBarMain title="계산 기준 안내" />
+        </HeaderContainer>
       </AppBar>
       <AppScreenContent>
-        <VStack gap="x4" py="x4" pb="x10">
-          <VStack px="spacingX.globalGutter" gap="x3">
-            <SegmentedControl
-              aria-label="기준 연도"
-              value={String(year)}
-              onValueChange={(v) => setYear(Number(v))}
-            >
-              {availableYears.map((y) => (
-                <SegmentedControlItem key={y} value={String(y)}>
-                  {getRules(y).label}
-                </SegmentedControlItem>
-              ))}
-            </SegmentedControl>
-            <Text textStyle="t4Regular" color="fg.neutralMuted">
-              {rules.description}. 소득세는 급여를 받는 시점에 적용되는 간이세액표로 계산해요.
-            </Text>
-            {!(rules.verified && table.verified) && (
-              <Callout
-                tone="neutral"
-                title="검증 전 데이터"
-                description="아래 값은 공식 자료와 최종 대조 전이에요. 참고용으로만 사용해 주세요."
+        <ScreenContainer>
+          <VStack gap="x4" py="x4" pb="x10">
+            <VStack px="spacingX.globalGutter" gap="x3">
+              <SegmentedControl
+                aria-label="기준 연도"
+                value={String(year)}
+                onValueChange={(v) => setYear(Number(v))}
+              >
+                {availableYears.map((y) => (
+                  <SegmentedControlItem key={y} value={String(y)}>
+                    {getRules(y).label}
+                  </SegmentedControlItem>
+                ))}
+              </SegmentedControl>
+              <Text textStyle="t4Regular" color="fg.neutralMuted">
+                {rules.description}. 소득세는 급여를 받는 시점에 적용되는 간이세액표로 계산해요.
+              </Text>
+              {!(rules.verified && table.verified) && (
+                <Callout
+                  tone="neutral"
+                  title="검증 전 데이터"
+                  description="아래 값은 공식 자료와 최종 대조 전이에요. 참고용으로만 사용해 주세요."
+                />
+              )}
+            </VStack>
+
+            <ListHeader as="h3">4대보험 (근로자 부담)</ListHeader>
+            <List>
+              <ListItem
+                title="국민연금"
+                detail={`전체 ${formatRate(rules.nationalPension.totalRate)}`}
+                suffix={
+                  <Text textStyle="t5Medium">{formatRate(rules.nationalPension.employeeRate)}</Text>
+                }
               />
+              {rules.nationalPension.periods.map((p) => (
+                <ListItem
+                  key={p.from}
+                  title={`기준소득월액 (${p.from.slice(5, 7)}월 ~ ${p.to.slice(5, 7)}월)`}
+                  detail={`하한 ${formatWon(p.monthlyIncomeMin)} · 상한 ${formatWon(p.monthlyIncomeMax)}`}
+                />
+              ))}
+              <ListItem
+                title="건강보험"
+                detail={`전체 ${formatRate(rules.healthInsurance.totalRate)}`}
+                suffix={
+                  <Text textStyle="t5Medium">
+                    {formatRate(rules.healthInsurance.employeeRate, 3)}
+                  </Text>
+                }
+              />
+              <ListItem
+                title="장기요양보험"
+                detail={
+                  rules.longTermCare.calcMethod === "ofHealthPremium"
+                    ? `건강보험료의 ${formatRate(rules.longTermCare.rateOfHealthPremium)}`
+                    : `소득의 ${formatRate(rules.longTermCare.rateOfIncome, 4)}`
+                }
+                suffix={
+                  <Text textStyle="t5Medium">{formatRate(rules.longTermCare.rateOfIncome, 4)}</Text>
+                }
+              />
+              <ListItem
+                title="고용보험"
+                suffix={
+                  <Text textStyle="t5Medium">
+                    {formatRate(rules.employmentInsurance.employeeRate)}
+                  </Text>
+                }
+              />
+            </List>
+
+            <ListHeader as="h3">세금</ListHeader>
+            <List>
+              {availableTables.map((t) => (
+                <ListItem
+                  key={t.tableId}
+                  title={`소득세 · ${t.title}`}
+                  detail={`적용 ${t.effectiveFrom} ~ ${t.effectiveTo ?? "현재"} · 자녀 차감 1명 ${formatWon(t.childAdjustment.one)}, 2명 ${formatWon(t.childAdjustment.two)}`}
+                />
+              ))}
+              <ListItem
+                title="지방소득세"
+                detail="소득세의 10%"
+                suffix={
+                  <Text textStyle="t5Medium">{formatRate(rules.incomeTax.localTaxRate)}</Text>
+                }
+              />
+              <ListItem
+                title="비과세 기본값 (식대)"
+                suffix={
+                  <Text textStyle="t5Medium">
+                    {formatWon(rules.defaults.nonTaxableMealMonthly)}
+                  </Text>
+                }
+              />
+              <ListItem
+                title="최저임금"
+                detail={`시급 ${formatWon(rules.minimumWage.hourly)}`}
+                suffix={<Text textStyle="t5Medium">월 {formatWon(rules.minimumWage.monthly)}</Text>}
+              />
+            </List>
+
+            <ListHeader as="h3">출처</ListHeader>
+            <List>
+              {rules.sources.map((url) => (
+                <ListLinkItem
+                  key={url}
+                  title={url.replace(/^https?:\/\//, "")}
+                  href={url}
+                  target="_blank"
+                  rel="noreferrer"
+                />
+              ))}
+            </List>
+
+            {import.meta.env.DEV && rules.notes.length > 0 && (
+              <VStack px="spacingX.globalGutter" gap="x2">
+                <Text textStyle="t4Bold">확인 필요 (개발 모드에서만 표시)</Text>
+                {rules.notes.map((n) => (
+                  <Text key={n} textStyle="t3Regular" color="fg.neutralMuted">
+                    · {n}
+                  </Text>
+                ))}
+              </VStack>
             )}
           </VStack>
-
-          <ListHeader as="h3">4대보험 (근로자 부담)</ListHeader>
-          <List>
-            <ListItem
-              title="국민연금"
-              detail={`전체 ${formatRate(rules.nationalPension.totalRate)}`}
-              suffix={
-                <Text textStyle="t5Medium">{formatRate(rules.nationalPension.employeeRate)}</Text>
-              }
-            />
-            {rules.nationalPension.periods.map((p) => (
-              <ListItem
-                key={p.from}
-                title={`기준소득월액 (${p.from.slice(5, 7)}월 ~ ${p.to.slice(5, 7)}월)`}
-                detail={`하한 ${formatWon(p.monthlyIncomeMin)} · 상한 ${formatWon(p.monthlyIncomeMax)}`}
-              />
-            ))}
-            <ListItem
-              title="건강보험"
-              detail={`전체 ${formatRate(rules.healthInsurance.totalRate)}`}
-              suffix={
-                <Text textStyle="t5Medium">
-                  {formatRate(rules.healthInsurance.employeeRate, 3)}
-                </Text>
-              }
-            />
-            <ListItem
-              title="장기요양보험"
-              detail={
-                rules.longTermCare.calcMethod === "ofHealthPremium"
-                  ? `건강보험료의 ${formatRate(rules.longTermCare.rateOfHealthPremium)}`
-                  : `소득의 ${formatRate(rules.longTermCare.rateOfIncome, 4)}`
-              }
-              suffix={
-                <Text textStyle="t5Medium">{formatRate(rules.longTermCare.rateOfIncome, 4)}</Text>
-              }
-            />
-            <ListItem
-              title="고용보험"
-              suffix={
-                <Text textStyle="t5Medium">
-                  {formatRate(rules.employmentInsurance.employeeRate)}
-                </Text>
-              }
-            />
-          </List>
-
-          <ListHeader as="h3">세금</ListHeader>
-          <List>
-            {availableTables.map((t) => (
-              <ListItem
-                key={t.tableId}
-                title={`소득세 · ${t.title}`}
-                detail={`적용 ${t.effectiveFrom} ~ ${t.effectiveTo ?? "현재"} · 자녀 차감 1명 ${formatWon(t.childAdjustment.one)}, 2명 ${formatWon(t.childAdjustment.two)}`}
-              />
-            ))}
-            <ListItem
-              title="지방소득세"
-              detail="소득세의 10%"
-              suffix={<Text textStyle="t5Medium">{formatRate(rules.incomeTax.localTaxRate)}</Text>}
-            />
-            <ListItem
-              title="비과세 기본값 (식대)"
-              suffix={
-                <Text textStyle="t5Medium">{formatWon(rules.defaults.nonTaxableMealMonthly)}</Text>
-              }
-            />
-            <ListItem
-              title="최저임금"
-              detail={`시급 ${formatWon(rules.minimumWage.hourly)}`}
-              suffix={<Text textStyle="t5Medium">월 {formatWon(rules.minimumWage.monthly)}</Text>}
-            />
-          </List>
-
-          <ListHeader as="h3">출처</ListHeader>
-          <List>
-            {rules.sources.map((url) => (
-              <ListLinkItem
-                key={url}
-                title={url.replace(/^https?:\/\//, "")}
-                href={url}
-                target="_blank"
-                rel="noreferrer"
-              />
-            ))}
-          </List>
-
-          {import.meta.env.DEV && rules.notes.length > 0 && (
-            <VStack px="spacingX.globalGutter" gap="x2">
-              <Text textStyle="t4Bold">확인 필요 (개발 모드에서만 표시)</Text>
-              {rules.notes.map((n) => (
-                <Text key={n} textStyle="t3Regular" color="fg.neutralMuted">
-                  · {n}
-                </Text>
-              ))}
-            </VStack>
-          )}
-        </VStack>
+        </ScreenContainer>
       </AppScreenContent>
     </AppScreen>
   );
