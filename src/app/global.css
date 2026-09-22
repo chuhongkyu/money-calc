@@ -1,0 +1,19 @@
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--seed-font-family);
+  background: var(--seed-color-bg-layer-default);
+  color: var(--seed-color-fg-neutral);
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+}
+
+/* 숫자 입력은 타블러 숫자로 정렬해 자리 이동을 줄인다 */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}

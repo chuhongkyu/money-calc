@@ -1,0 +1,16 @@
+node_modules
+dist
+dist-ssr
+coverage
+.env
+.env.local
+.env.*.local
+*.log
+.DS_Store
+.vite
+playwright-report
+test-results
+# Capacitor native projects are generated (pnpm build:app); commit them once native work starts
+ios/App/App/public
+android/app/src/main/assets/public
+.vercel

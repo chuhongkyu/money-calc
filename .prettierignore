@@ -1,0 +1,6 @@
+node_modules
+dist
+coverage
+pnpm-lock.yaml
+seed-design
+src/rules/incomeTaxTable/*.json
