@@ -6,6 +6,9 @@ coverage
 .env.local
 .env.*.local
 *.log
+# 이 저장소는 pnpm 전용. npm/yarn 으로 install 하면 생기는 락파일은 커밋하지 않는다
+package-lock.json
+yarn.lock
 .DS_Store
 .vite
 playwright-report

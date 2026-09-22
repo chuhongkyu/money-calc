@@ -17,3 +17,42 @@ body {
 .tabular {
   font-variant-numeric: tabular-nums;
 }
+
+/*
+ * 브랜드 컬러: SEED 기본 팔레트(당근 주황) 대신 네이버 그린(#03C75A)을 쓴다.
+ * 컴포넌트를 고치지 않고 SEED 의 brand 팔레트 토큰만 덮어쓴다.
+ * --seed-color-bg-brand-solid / fg-brand / stroke-brand-* 가 모두 이 팔레트를 참조하므로
+ * 여기만 바꾸면 variant="brandSolid" 등 전부 따라온다.
+ * 선택자는 @seed-design/css 의 base.css 와 동일하게 맞춰야 명시도 싸움에서 이긴다.
+ * (main.tsx 에서 all.css 다음에 import 되므로 같은 명시도면 이 파일이 이긴다)
+ */
+:root,
+:root[data-seed-color-mode="system"][data-seed-user-color-scheme="light"],
+:root[data-seed-color-mode="light-only"],
+:root [data-seed-color-mode="light-only"] {
+  --seed-color-palette-carrot-100: #eefcf4;
+  --seed-color-palette-carrot-200: #dcf9e9;
+  --seed-color-palette-carrot-300: #bef4d6;
+  --seed-color-palette-carrot-400: #8decb8;
+  --seed-color-palette-carrot-500: #57db92;
+  --seed-color-palette-carrot-600: #03c75a; /* 네이버 그린 */
+  --seed-color-palette-carrot-700: #03a64c;
+  --seed-color-palette-carrot-800: #02883e;
+  --seed-color-palette-carrot-900: #025f2c;
+  --seed-color-palette-carrot-1000: #013719;
+}
+
+:root[data-seed-color-mode="system"][data-seed-user-color-scheme="dark"],
+:root[data-seed-color-mode="dark-only"],
+:root [data-seed-color-mode="dark-only"] {
+  --seed-color-palette-carrot-100: #1d2b23;
+  --seed-color-palette-carrot-200: #1e3e2c;
+  --seed-color-palette-carrot-300: #205538;
+  --seed-color-palette-carrot-400: #14713e;
+  --seed-color-palette-carrot-500: #0c9248;
+  --seed-color-palette-carrot-600: #07ab51;
+  --seed-color-palette-carrot-700: #03c75a; /* 다크에선 700 이 brand-solid */
+  --seed-color-palette-carrot-800: #51ec96;
+  --seed-color-palette-carrot-900: #c6e7d5;
+  --seed-color-palette-carrot-1000: #ecf4ef;
+}
