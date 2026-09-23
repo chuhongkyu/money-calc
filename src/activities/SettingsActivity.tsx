@@ -7,6 +7,7 @@ import { ListHeader } from "seed-design/ui/list-header";
 import { Snackbar, useSnackbarAdapter } from "seed-design/ui/snackbar";
 import { useEntitlementStore } from "@/app/entitlementStore";
 import { useCalculatorStore } from "@/app/store";
+import { useDocumentSeo } from "@/app/useDocumentSeo";
 import { HeaderContainer, ScreenContainer } from "@/components/common/ScreenContainer";
 import { site } from "@/legal/site";
 
@@ -15,6 +16,13 @@ export const SettingsActivity: ActivityComponentType<"SettingsActivity"> = () =>
   const year = useCalculatorStore((s) => s.asOf.slice(0, 4));
   const noAds = useEntitlementStore((s) => s.noAds);
   const snackbar = useSnackbarAdapter();
+
+  useDocumentSeo({
+    title: "설정 | 연봉 실수령액 계산기",
+    description: "광고 제거와 계산 기준 안내, 법적 고지를 확인합니다.",
+    path: "/settings",
+    noIndex: true,
+  });
 
   // TODO(native): RevenueCat 구매/복원 연결. 지금은 안내만.
   const notReady = () =>

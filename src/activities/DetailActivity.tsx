@@ -9,6 +9,7 @@ import { SegmentedControl, SegmentedControlItem } from "seed-design/ui/segmented
 import { Switch } from "seed-design/ui/switch";
 import { useInterstitialBeforeResult } from "@/ads/react/useAds";
 import { useCalculatorStore } from "@/app/store";
+import { useDocumentSeo } from "@/app/useDocumentSeo";
 import { useSalaryPreview } from "@/app/useSalaryPreview";
 import { HeaderContainer, ScreenContainer } from "@/components/common/ScreenContainer";
 import { MoneyInput } from "@/components/inputs/MoneyInput";
@@ -26,6 +27,15 @@ export const DetailActivity: ActivityComponentType<"DetailActivity"> = () => {
   const { issues, result } = useSalaryPreview();
   const keyboardInset = useKeyboardInset();
   const showInterstitial = useInterstitialBeforeResult();
+
+  // robots.txt 로 크롤링을 막은 화면. 홈 계산기의 한 상태일 뿐이라 canonical 은 "/" 를 가리킨다.
+  useDocumentSeo({
+    title: "더 정확하게 알아보기 | 연봉 실수령액 계산기",
+    description:
+      "비과세액, 부양가족 수, 자녀 수, 원천징수 비율을 넣어 실수령액을 급여명세서에 가깝게 맞춥니다.",
+    path: "/",
+    noIndex: true,
+  });
 
   const amountMax =
     store.amountType === "annual" ? SALARY_LIMITS.maxAnnual : SALARY_LIMITS.maxMonthly;

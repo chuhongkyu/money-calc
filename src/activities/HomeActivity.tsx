@@ -8,6 +8,7 @@ import { Callout } from "seed-design/ui/callout";
 import { SegmentedControl, SegmentedControlItem } from "seed-design/ui/segmented-control";
 import { useInterstitialBeforeResult } from "@/ads/react/useAds";
 import { useCalculatorStore } from "@/app/store";
+import { useDocumentSeo } from "@/app/useDocumentSeo";
 import { useSalaryPreview } from "@/app/useSalaryPreview";
 import { LegalFooter } from "@/components/common/LegalFooter";
 import { RuleBadge } from "@/components/common/RuleBadge";
@@ -28,6 +29,13 @@ export const HomeActivity: ActivityComponentType<"HomeActivity"> = () => {
   const store = useCalculatorStore();
   const { ruleSet, result } = useSalaryPreview();
   const showInterstitial = useInterstitialBeforeResult();
+
+  useDocumentSeo({
+    title: "연봉 실수령액 계산기 · 2026년 월 실수령액 바로 계산",
+    description:
+      "연봉을 입력하면 2026년 기준 월 실수령액과 4대보험·소득세 공제 내역을 바로 계산합니다. 로그인 없음, 입력값은 내 기기에만 저장.",
+    path: "/",
+  });
 
   const amountMax =
     store.amountType === "annual" ? SALARY_LIMITS.maxAnnual : SALARY_LIMITS.maxMonthly;

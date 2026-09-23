@@ -15,6 +15,7 @@ import { Callout } from "seed-design/ui/callout";
 import { Snackbar, useSnackbarAdapter } from "seed-design/ui/snackbar";
 import { AdBannerSlot } from "@/ads/react/AdBannerSlot";
 import { useCalculatorStore } from "@/app/store";
+import { useDocumentSeo } from "@/app/useDocumentSeo";
 import { useSalaryPreview } from "@/app/useSalaryPreview";
 import { RuleBadge } from "@/components/common/RuleBadge";
 import { HeaderContainer, ScreenContainer } from "@/components/common/ScreenContainer";
@@ -29,6 +30,14 @@ export const ResultActivity: ActivityComponentType<"ResultActivity"> = () => {
   const { push, pop } = useFlow();
   const store = useCalculatorStore();
   const { ruleSet, result, comparison } = useSalaryPreview();
+
+  // robots.txt 로 크롤링을 막은 화면. 홈 계산기의 한 상태일 뿐이라 canonical 은 "/" 를 가리킨다.
+  useDocumentSeo({
+    title: "계산 결과 | 연봉 실수령액 계산기",
+    description: "월 실수령액과 4대보험·소득세 공제 내역을 항목별로 보여줍니다.",
+    path: "/",
+    noIndex: true,
+  });
   const snackbar = useSnackbarAdapter();
 
   const handleShare = async () => {

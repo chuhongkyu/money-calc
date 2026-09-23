@@ -8,6 +8,7 @@ import { ListHeader } from "seed-design/ui/list-header";
 import { SegmentedControl, SegmentedControlItem } from "seed-design/ui/segmented-control";
 import { useState } from "react";
 import { useCalculatorStore } from "@/app/store";
+import { useDocumentSeo } from "@/app/useDocumentSeo";
 import { HeaderContainer, ScreenContainer } from "@/components/common/ScreenContainer";
 import { formatRate, formatWon } from "@/lib/money";
 import { availableTables, availableYears, getRuleSet, getRules, hasRules } from "@/rules";
@@ -18,6 +19,16 @@ export const RulesInfoActivity: ActivityComponentType<"RulesInfoActivity"> = ({ 
   const paramYear = Number(params.year);
   const [year, setYear] = useState(hasRules(paramYear) ? paramYear : storeYear);
   const { rules, table } = getRuleSet(year);
+
+  useDocumentSeo({
+    title: `${year}년 4대보험 요율·근로소득 간이세액표 | 연봉 실수령액 계산기`,
+    description:
+      `${year}년 국민연금 ${formatRate(rules.nationalPension.employeeRate)}, ` +
+      `건강보험 ${formatRate(rules.healthInsurance.employeeRate, 3)}, ` +
+      `고용보험 ${formatRate(rules.employmentInsurance.employeeRate)} 등 ` +
+      `근로자 부담 요율과 ${table.title} 적용 기준을 정리했습니다.`,
+    path: `/rules/${year}`,
+  });
 
   return (
     <AppScreen>
